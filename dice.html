@@ -9,6 +9,7 @@
   <body>
     <h1>해당 점수: <span id="result"></span></h1>
     <input type ="button" name="dicebtn" onclick="dice()"">도박</input>
+    <input type ="button" name="stopbtn" onclick="stop()"">멈춤</input>
   </body>
   <script>
     let score = 0;
@@ -22,12 +23,20 @@
         score = score + num;
       }
 
-      console.log("랜덤값은 " + num + "누적값은 " + score);
+      document.getElementById("result").innerHTML = ("랜덤값은 " + num + ", 누적값은 " + score);  
+
 
       if (score == 0) {
-        let temp = document.getElementsByName("dicebtn")[0];
-        temp.setAttribute('type', 'hidden');
+        document.getElementsByName("dicebtn")[0].setAttribute('type', 'hidden');
+        document.getElementsByName("stopbtn")[0].setAttribute('type', 'hidden');
       }
+    }
+
+    function stop(){
+        document.getElementById("result").innerHTML = ("누적값은 " + score);  
+
+        document.getElementsByName("dicebtn")[0].setAttribute('type', 'hidden');
+        document.getElementsByName("stopbtn")[0].setAttribute('type', 'hidden');
     }
   </script>
 </html>
