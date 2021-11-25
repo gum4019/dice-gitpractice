@@ -7,36 +7,53 @@
     <title>Document</title>
   </head>
   <body>
+    <!-- 점수 나오는 곳-->
     <h1>해당 점수: <span id="result"></span></h1>
-    <input type ="button" name="dicebtn" onclick="dice()"">도박</input>
-    <input type ="button" name="stopbtn" onclick="stop()"">멈춤</input>
+    <!-- 도박 버튼-->
+    <input type="button" name="dicebtn" onclick="dice()" />도박
+    <!-- 멈춤 버튼-->
+    <input type="button" name="stopbtn" onclick="stop()" />멈춤
   </body>
   <script>
-    let score = 0;
+    /*
+
+      * 도박 버튼: 도박을 시작함. 주사위 해당 숫자가 1이면 점수를 0점으로 만들고, 1이 아닌 다른 숫자라면 누적합으로 계속 진행됨.
+      * 멈춤 버튼: 도박을 멈춤. 선택할 수 있는 두 개의 버튼 모두 사라지고 누적 점수를 출력하고 끝냄.
+      
+      */
+    let score = 0; //누적합을 변수
 
     function dice() {
-      let num = Math.floor(Math.random() * 6) + 1;
+      //도박 버튼 로직
+      let num = Math.floor(Math.random() * 6) + 1; //1부터 6까지의 랜덤한 숫자를 변수 num에 넣음
 
       if (num == 1) {
+        //만약 해당 숫자가 1이라면 누적합은 0으로 초기화 됨
         score = 0;
       } else {
+        //1이 아닌 그외 숫자라면 누적합 진행
         score = score + num;
       }
 
-      document.getElementById("result").innerHTML = ("랜덤값은 " + num + ", 누적값은 " + score);  
-
+      document.getElementById("result").innerHTML =
+        "랜덤값은 " + num + ", 점수는 " + score; //도박이 진행되며, 현재 랜덤값과 누적합을 보여줌
 
       if (score == 0) {
-        document.getElementsByName("dicebtn")[0].setAttribute('type', 'hidden');
-        document.getElementsByName("stopbtn")[0].setAttribute('type', 'hidden');
+        //위의 로직에서 0이 되었다면 === 주사위 숫자가 1이어서 누적합이 초기화가 되었다면
+        document.getElementById("result").innerHTML =
+          "숫자 1이 나와 전재산을 몰수 당했습니다"; //이전의 result값 대신 몰수 당했다는 걸 출력하자...
+
+        document.getElementsByName("dicebtn")[0].setAttribute("type", "hidden"); //dice버튼 숨김 처리
+        document.getElementsByName("stopbtn")[0].setAttribute("type", "hidden"); //stop버튼 숨김 처리
       }
     }
 
-    function stop(){
-        document.getElementById("result").innerHTML = ("누적값은 " + score);  
+    function stop() {
+      //멈춤 버튼 로직
+      document.getElementById("result").innerHTML = "총 점수는 " + score; //랜덤값 없이 진행되므로 해당 내용은 빼고 총 누적값만 출력
 
-        document.getElementsByName("dicebtn")[0].setAttribute('type', 'hidden');
-        document.getElementsByName("stopbtn")[0].setAttribute('type', 'hidden');
+      document.getElementsByName("dicebtn")[0].setAttribute("type", "hidden"); //dice버튼 숨김 처리
+      document.getElementsByName("stopbtn")[0].setAttribute("type", "hidden"); //stop버튼 숨김 처리
     }
   </script>
 </html>
