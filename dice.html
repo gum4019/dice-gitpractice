@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>해당 점수: <span id="result"></span></h1>
+    <input type ="button" name="dicebtn" onclick="dice()"">도박</input>
+  </body>
+  <script>
+    let score = 0;
+
+    function dice() {
+      let num = Math.floor(Math.random() * 6) + 1;
+
+      if (num == 1) {
+        score = 0;
+      } else {
+        score = score + num;
+      }
+
+      console.log("");
+
+      if (score == 0) {
+        let temp = document.getElementsByName("dicebtn")[0];
+        temp.setAttribute('type', 'hidden');
+      }
+    }
+  </script>
+</html>
